@@ -5,6 +5,7 @@
   const materialTemplate = document.querySelector("#material-template");
   const materialList = document.querySelector("#material-list");
   const loader = document.querySelector('#loader');
+  const errortext = document.querySelector('#error');
 
   //This information needs to be removed then pulled with an AJAX Call using the Fetch API
   //this is the api url https://swiftpixel.com/earbud/api/infoboxes"
@@ -38,10 +39,18 @@
       });
 
       loader.classList.toggle('hidden');
+      error.innerHTML = '';
+      error.appendChild(ul);
     })
-    .catch() //error message here
+    .catch(error => {
+      console.log(error);
+      const errorMessage = document.createElement('p');
+      errortext.textContent = "oops, it looks like something went wrong. Please check your connection and try again later.";
 
-  }
+      errortext.appendChild(errorMessage);
+      errortext.classList.toggle('hidden');
+  }) }
+
   loadInfoBoxes();
 
   function loadMaterialInfo() {
