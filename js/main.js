@@ -4,6 +4,7 @@
   const hotspots = document.querySelectorAll(".Hotspot");
   const materialTemplate = document.querySelector("#material-template");
   const materialList = document.querySelector("#material-list");
+  const loader = document.querySelector('#loader');
 
   //This information needs to be removed then pulled with an AJAX Call using the Fetch API
   //this is the api url https://swiftpixel.com/earbud/api/infoboxes"
@@ -18,7 +19,7 @@
   function loadInfoBoxes() {
 
     //make AJAX call here
-
+    loader.classList.remove('hidden');
     fetch("https://swiftpixel.com/earbud/api/infoboxes")
     .then(response => response.json())
     .then(infoBoxes => {
@@ -35,6 +36,8 @@
         selected.appendChild(titleElement);
         selected.appendChild(textElement);
       });
+
+      loader.classList.toggle('hidden');
     })
     .catch() //error message here
 
